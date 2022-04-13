@@ -11,7 +11,7 @@ using OpenQA.Selenium.Support.UI;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class UntitledTestCase
+    public class AddNewContact
     {
         private IWebDriver driver;
         private IWebDriver driver2;
@@ -48,7 +48,7 @@ namespace WebAddressbookTests
         {
             OpenHomePage(driver);
             Login(new AccountData("admin", "secret"), driver);               
-            FillNewContactData(new UserData("Lans", "Won", "DIWon", "LWDW"),driver);
+            FillNewContactData(new UserData("Nail", "Hummer", "Imagine", "Pegasus"),driver);
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
             OpenHomePage(driver);
             Logout(driver);
@@ -60,7 +60,7 @@ namespace WebAddressbookTests
         {
             OpenHomePage(driver2);
             Login(new AccountData("admin", "secret"), driver2);
-            FillNewContactData(new UserData("Lans", "Won", "DIWon", "LWDW"), driver2);
+            FillNewContactData(new UserData("Lans", "Won", "DIWon", "Wolwerine"), driver2);
             driver2.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
             OpenHomePage(driver2);
             Logout(driver2);

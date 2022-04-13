@@ -45,7 +45,7 @@ namespace WebAddressbookTests
             }
             Assert.AreEqual("", verificationErrors.ToString());
         }
-        [TestCase(TestName = "Firefox проверка")]
+        [TestCase(TestName = "Firefox Добавление группы контактов")]
         //[Test]
         public void GroupCreationTestFirefox()
         {
@@ -58,7 +58,7 @@ namespace WebAddressbookTests
             GoToGroupsPage(driver);
             Logout(driver);
         }
-        [TestCase(TestName = "Chrome проверка")]
+        [TestCase(TestName = "Chrome Добавление группы контактов")]
         //[Test (Type="Жопа")]
         public void GroupCreationTestChrome()
         {
