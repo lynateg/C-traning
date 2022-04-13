@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>addressbook_web_test</RootNamespace>
+    <RootNamespace>WebAddressbookTests</RootNamespace>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
