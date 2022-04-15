@@ -22,8 +22,8 @@ namespace WebAddressbookTests
         [SetUp]
         public void SetupTest()
         {
-            driver = new FirefoxDriver(@"C:\geckodriver-v0.31.064\");
-            driver2 = new ChromeDriver(@"C:\Users\Lynateg\.nuget\packages\selenium.webdriver.chromedriver\100.0.4896.6000\driver\win32");
+            driver = new FirefoxDriver();
+            driver2 = new ChromeDriver();
             baseURL = "http://localhost/addressbook/";
             verificationErrors = new StringBuilder();
         }

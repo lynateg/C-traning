@@ -1,19 +1,5 @@
 ﻿namespace WebAddressbookTests
 {
-    public class Test
-    {
-        public void Do()
-        {
-            var x = new AccountData("1", "2");
-
-            var y = new AccountDataEasy() { Username = "1", Password = "2" };
-
-            var z = new AccountDataEasy();
-            z.Username = "1";
-            z.Password = "2";
-        }
-    }
-
     public class AccountData
     {
         private string _username;
@@ -48,11 +34,6 @@
         }
     }
 
-    public class AccountDataEasy
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
-    }
 }
 
 
