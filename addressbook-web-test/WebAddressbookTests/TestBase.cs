@@ -101,11 +101,11 @@ namespace WebAddressbookTests
         }
         protected void DeleteGroup(IWebDriver webDriver)
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/input[5]")).Click();
+            webDriver.FindElement(By.XPath("//div[@id='content']/form/input[5]")).Click();
         }
         protected void SelectGroup(int index, IWebDriver webDriver)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            webDriver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
         }
     }
 }
