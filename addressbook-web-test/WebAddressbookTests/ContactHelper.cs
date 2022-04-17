@@ -14,8 +14,7 @@ namespace WebAddressbookTests
     {
         protected object _baseURL;
         public ContactHelper(IWebDriver webDriver) 
-            : base(webDriver)
-        {}
+            : base(webDriver) {}
         public void FillNewContactData(UserData userData, IWebDriver webDriver)
         {
             webDriver.FindElement(By.LinkText("add new")).Click();

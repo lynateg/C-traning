@@ -13,7 +13,6 @@ namespace WebAddressbookTests
     public class NavigationHelper : HelperBase
     {
         protected object _baseURL;
-         
         public NavigationHelper(IWebDriver webDriver, string baseURL)
             : base(webDriver)
         {
