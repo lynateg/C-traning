@@ -17,26 +17,26 @@ namespace WebAddressbookTests
         //[Test]
         public void RemoveGroupFirefox()
         {
-            OpenHomePage(driver);
-            Login(new AccountData("admin", "secret"), driver);
-            GoToGroupsPage(driver);
-            SelectGroup(1,driver);
-            DeleteGroup(driver);
-            GoToGroupsPage(driver);
-            Logout(driver);
+            navigator.OpenHomePage(driver, baseURL);
+            loginHelper.Login(new AccountData("admin", "secret"), driver);
+            navigator.GoToGroupsPage(driver);
+            groupHelper.SelectGroup(1,driver);
+            groupHelper.DeleteGroup(driver);
+            navigator.GoToGroupsPage(driver);
+            loginHelper.Logout(driver);
         }
 
         [TestCase(TestName = "Chrome Удаление группы 1")]
         //[Test]
         public void RemoveGroupChrome()
         {
-            OpenHomePage(driver2);
-            Login(new AccountData("admin", "secret"), driver2);
-            GoToGroupsPage(driver2);
-            SelectGroup(1, driver2);
-            DeleteGroup(driver2);
-            GoToGroupsPage(driver2);
-            Logout(driver2);
+            navigator.OpenHomePage(driver2, baseURL);
+            loginHelper.Login(new AccountData("admin", "secret"), driver2);
+            navigator.GoToGroupsPage(driver2);
+            groupHelper.SelectGroup(1, driver2);
+            groupHelper.DeleteGroup(driver2);
+            navigator.GoToGroupsPage(driver2);
+            loginHelper.Logout(driver2);
         }
 
     }

@@ -15,27 +15,27 @@ namespace WebAddressbookTests
         //[Test]
         public void GroupCreationTestFirefox() 
         {
-            OpenHomePage(driver);
-            Login(new AccountData("admin", "secret"), driver);
-            GoToGroupsPage(driver);
-            InitGroupCreation(driver);
-            FillGroupForm(new GroupData("xxx", "zzz", "yyy"), driver);
-            SubmitGroupCreation(driver);
-            GoToGroupsPage(driver);
-            Logout(driver);
+            navigator.OpenHomePage(driver,baseURL);
+            loginHelper.Login(new AccountData("admin", "secret"), driver);
+            navigator.GoToGroupsPage(driver);
+            groupHelper.InitGroupCreation(driver);
+            groupHelper.FillGroupForm(new GroupData("xxx", "zzz", "yyy"), driver);
+            groupHelper.SubmitGroupCreation(driver);
+            navigator.GoToGroupsPage(driver);
+            loginHelper.Logout(driver);
         }
         [TestCase(TestName = "Chrome Добавление группы контактов")]
         //[Test (Type="Жопа")]
         public void GroupCreationTestChrome()
         {
-            OpenHomePage(driver2);
-            Login(new AccountData("admin", "secret"), driver2);
-            GoToGroupsPage(driver2);
-            InitGroupCreation(driver2);
-            FillGroupForm(new GroupData("aaa", "bbbb", "ccc"), driver2);
-            SubmitGroupCreation(driver2);
-            GoToGroupsPage(driver2);
-            Logout(driver2);
+            navigator.OpenHomePage(driver2,baseURL);
+            loginHelper.Login(new AccountData("admin", "secret"), driver2);
+            navigator.GoToGroupsPage(driver2);
+            groupHelper.InitGroupCreation(driver2);
+            groupHelper.FillGroupForm(new GroupData("aaa", "bbbb", "ccc"), driver2);
+            groupHelper.SubmitGroupCreation(driver2);
+            navigator.GoToGroupsPage(driver2);
+            loginHelper.Logout(driver2);
         }
                     
     }
