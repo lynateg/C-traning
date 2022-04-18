@@ -3,53 +3,50 @@
   <Class Name="WebAddressbookTests.AccountData" Collapsed="true">
     <Position X="6.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAIAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AccountData.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.AddNewContact" Collapsed="true">
     <Position X="1.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AddNewContact.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.GroupCreationTests" Collapsed="true">
     <Position X="4.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GroupCreationTest.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.TestBase">
     <Position X="3" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAQAIAAAAABAAAAAAATAAAAAAAAAABCAAAIAACA=</HashCode>
+      <HashCode>AAAAAAQAIAAAAABAAAAAAADAAAAAAAAAACAAAAIAACA=</HashCode>
       <FileName>TestBase.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="groupHelper" />
-      <Field Name="loginHelper" />
-      <Field Name="navigator" />
-      <Field Name="contactHelper" />
+      <Field Name="app" />
     </ShowAsAssociation>
   </Class>
   <Class Name="WebAddressbookTests.UserData" Collapsed="true">
     <Position X="10.75" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAMABAAAAAAAIAAEAAAAAEAAAAAAAAAAAAgAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>UserData.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.GroupRemovalTests" Collapsed="true">
     <Position X="3" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>GroupRemovalTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.ContactHelper" Collapsed="true">
-    <Position X="9" Y="4.25" Width="1.5" />
+    <Position X="7.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAACAAAAAAAAIA=</HashCode>
       <FileName>ContactHelper.cs</FileName>
@@ -63,14 +60,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.LoginHelper" Collapsed="true">
-    <Position X="7.75" Y="3.5" Width="1.5" />
+    <Position X="9.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>LoginHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.NavigationHelper" Collapsed="true">
-    <Position X="10.75" Y="5.25" Width="1.5" />
+    <Position X="11.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAIA=</HashCode>
       <FileName>NavigationHelper.cs</FileName>
@@ -82,6 +79,19 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
       <FileName>HelperBase.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="WebAddressbookTests.ApplicationManager" Collapsed="true">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAEAEQABAAAAAAAAAAAAASAAAAAAAAAIBCAABIAACA=</HashCode>
+      <FileName>ApplicationManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="groupHelper" />
+      <Field Name="loginHelper" />
+      <Field Name="contactHelper" />
+      <Field Name="navigator" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
