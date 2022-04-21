@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="WebAddressbookTests.AccountData" Collapsed="true">
-    <Position X="11" Y="2.75" Width="1.5" />
+  <Class Name="WebAddressbookTests.AccountData">
+    <Position X="11" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAIAAAAAAAA=</HashCode>
       <FileName>Model\AccountData.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.AddNewContact" Collapsed="true">
-    <Position X="1.75" Y="7" Width="1.5" />
+    <Position X="2" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Tests\AddNewContact.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.GroupCreationTests" Collapsed="true">
-    <Position X="6.25" Y="7" Width="1.5" />
+    <Position X="6.5" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Tests\GroupCreationTest.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WebAddressbookTests.TestBase" Collapsed="true">
-    <Position X="4" Y="5.75" Width="1.5" />
+  <Class Name="WebAddressbookTests.TestBase">
+    <Position X="4.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAIAAAAABAAAAAAADAAAAAAAAAACAAAAIAACA=</HashCode>
       <FileName>Tests\TestBase.cs</FileName>
@@ -36,7 +36,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="WebAddressbookTests.GroupRemovalTests" Collapsed="true">
-    <Position X="4" Y="7" Width="1.5" />
+    <Position X="4.25" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Tests\GroupRemovalTests.cs</FileName>
@@ -63,8 +63,8 @@
       <FileName>AppManager\GroupHelper.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WebAddressbookTests.HelperBase" Collapsed="true">
-    <Position X="5" Y="2.75" Width="1.5" />
+  <Class Name="WebAddressbookTests.HelperBase">
+    <Position X="4.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
       <FileName>AppManager\HelperBase.cs</FileName>
