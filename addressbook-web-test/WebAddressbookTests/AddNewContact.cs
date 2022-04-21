@@ -22,8 +22,8 @@ namespace WebAddressbookTests
         [SetUp]
         public void SetupTest()
         {
-            driver = new FirefoxDriver(@"C:\geckodriver-v0.31.064\");
-            driver2 = new ChromeDriver(@"C:\Users\Lynateg\.nuget\packages\selenium.webdriver.chromedriver\100.0.4896.6000\driver\win32");
+            driver = new FirefoxDriver();
+            driver2 = new ChromeDriver();
             baseURL = "http://localhost/addressbook/";
             verificationErrors = new StringBuilder();
         }
@@ -47,13 +47,19 @@ namespace WebAddressbookTests
         public void AddNewContactFirefox()
         {
             OpenHomePage(driver);
-            Login(new AccountData("admin", "secret"), driver);               
-            FillNewContactData(new UserData("Nail", "Hummer", "Imagine", "Pegasus"),driver);
-            driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            Login(new AccountData("admin", "secret"), driver);
+            FillNewContactData(new UserData("Nail", "Hummer", "Imagine", "Pegasus"), driver);
+            ConfirmNewContact(driver);
             OpenHomePage(driver);
             Logout(driver);
 
         }
+
+        private void ConfirmNewContact(IWebDriver webDriver)
+        {
+            webDriver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+        }
+
         [TestCase(TestName = "Chrome Добавление контакта")]
         //[Test]
         public void AddNewContactChrome()
@@ -61,7 +67,7 @@ namespace WebAddressbookTests
             OpenHomePage(driver2);
             Login(new AccountData("admin", "secret"), driver2);
             FillNewContactData(new UserData("Lans", "Won", "DIWon", "Wolwerine"), driver2);
-            driver2.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            ConfirmNewContact(driver2);
             OpenHomePage(driver2);
             Logout(driver2);
 
