@@ -17,25 +17,23 @@ namespace WebAddressbookTests
         //[Test]
         public void AddNewContactFirefox()
         {
-            OpenHomePage(driver);
-            Login(new AccountData("admin", "secret"), driver);               
-            FillNewContactData(new UserData("Nail", "Hummer", "Imagine", "Pegasus"),driver);
-            driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
-            OpenHomePage(driver);
-            Logout(driver);
-
+            navigator.OpenHomePage(driver, baseURL);
+            loginHelper.Login(new AccountData("admin", "secret"), driver);
+            contactHelper.FillNewContactData(new UserData("Nail", "Hummer", "Imagine", "Pegasus"), driver);
+            contactHelper.ConfirmCreationNewContact(driver);
+            navigator.OpenHomePage(driver, baseURL);
+            loginHelper.Logout(driver);
         }
         [TestCase(TestName = "Chrome Добавление контакта")]
         //[Test]
         public void AddNewContactChrome()
         {
-            OpenHomePage(driver2);
-            Login(new AccountData("admin", "secret"), driver2);
-            FillNewContactData(new UserData("Lans", "Won", "DIWon", "Wolwerine"), driver2);
-            driver2.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
-            OpenHomePage(driver2);
-            Logout(driver2);
-
+            navigator.OpenHomePage(driver2,baseURL);
+            loginHelper.Login(new AccountData("admin", "secret"), driver2);
+            contactHelper.FillNewContactData(new UserData("Lans", "Won", "DIWon", "Wolwerine"), driver2);
+            contactHelper.ConfirmCreationNewContact(driver2);
+            navigator.OpenHomePage(driver2, baseURL);
+            loginHelper.Logout(driver2);
         }
     }
 }
