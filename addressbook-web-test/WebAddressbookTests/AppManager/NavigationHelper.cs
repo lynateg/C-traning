@@ -12,12 +12,10 @@ namespace WebAddressbookTests
 {
     public class NavigationHelper : HelperBase
     {
-        protected object _baseURL;
-        public NavigationHelper(IWebDriver webDriver, string baseURL)
-            : base(webDriver)
-        {
-            _baseURL = baseURL;
-        }
+        
+        public NavigationHelper(ApplicationManager manager, string baseURL)
+            : base(manager)
+        { }
         public void OpenHomePage(IWebDriver webDriver, string baseURL)
         {
             webDriver.Navigate().GoToUrl(baseURL);

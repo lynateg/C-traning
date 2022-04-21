@@ -20,9 +20,7 @@ namespace WebAddressbookTests
             app.Navigator.OpenHomePage(driver, baseURL);
             app.Auth.Login(new AccountData("admin", "secret"), driver);
             app.Navigator.GoToGroupsPage(driver);
-            app.Groups.SelectGroup(1,driver);
-            app.Groups.DeleteGroup(driver);
-            app.Navigator.GoToGroupsPage(driver);
+            app.Groups.Delete(1,driver);
             app.Auth.Logout(driver);
         }
 
@@ -33,9 +31,7 @@ namespace WebAddressbookTests
             app.Navigator.OpenHomePage(driver2, baseURL);
             app.Auth.Login(new AccountData("admin", "secret"), driver2);
             app.Navigator.GoToGroupsPage(driver2);
-            app.Groups.SelectGroup(1, driver2);
-            app.Groups.DeleteGroup(driver2);
-            app.Navigator.GoToGroupsPage(driver2);
+            app.Groups.Delete(1, driver2);
             app.Auth.Logout(driver2);
         }
 

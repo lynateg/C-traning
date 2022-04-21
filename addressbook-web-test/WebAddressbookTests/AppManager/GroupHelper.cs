@@ -12,29 +12,55 @@ namespace WebAddressbookTests
 {
     public class GroupHelper : HelperBase
     {
-        protected object _baseURL;
-        public GroupHelper(IWebDriver webDriver, string baseURL)
-            :base(webDriver)
+      
+        public GroupHelper(ApplicationManager manager)
+            :base(manager)
         {            
-            _baseURL = baseURL;
+            
         }
-        public void DeleteGroup(IWebDriver webDriver)
+        public GroupHelper DeleteGroup(IWebDriver webDriver)
         {
             webDriver.FindElement(By.XPath("//div[@id='content']/form/input[5]")).Click();
+            return this;
         }
-        public void SelectGroup(int index, IWebDriver webDriver)
+
+        internal GroupHelper Modify(int index, GroupData groupData, IWebDriver webDriver)
+        {
+            SelectGroup(index, webDriver);
+            InitGroupModification(webDriver);
+            FillGroupForm(groupData, webDriver);
+            SubmitGroupModification(webDriver);
+            return this;
+        }
+
+        private GroupHelper SubmitGroupModification(IWebDriver webDriver)
+        {
+            webDriver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        private GroupHelper InitGroupModification(IWebDriver webDriver)
+        {
+            webDriver.FindElement(By.Name("edit")).Click();
+            return this;
+        }
+
+        public GroupHelper SelectGroup(int index, IWebDriver webDriver)
         {
             webDriver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
         }
-        public void InitGroupCreation(IWebDriver webDriver)
+        public GroupHelper InitGroupCreation(IWebDriver webDriver)
         {
             webDriver.FindElement(By.Name("new")).Click();
+            return this;
         }
-        public void SubmitGroupCreation(IWebDriver webDriver)
+        public GroupHelper SubmitGroupCreation(IWebDriver webDriver)
         {
             webDriver.FindElement(By.Name("submit")).Click();
+            return this;
         }
-        public void FillGroupForm(GroupData groupInfo, IWebDriver webDriver)
+        public GroupHelper FillGroupForm(GroupData groupInfo, IWebDriver webDriver)
         {
             webDriver.FindElement(By.Name("group_name")).Click();
             webDriver.FindElement(By.Name("group_name")).Clear();
@@ -45,6 +71,28 @@ namespace WebAddressbookTests
             webDriver.FindElement(By.Name("group_footer")).Click();
             webDriver.FindElement(By.Name("group_footer")).Clear();
             webDriver.FindElement(By.Name("group_footer")).SendKeys(groupInfo.GroupFooter);
-        }                
+            return this;
+        }
+        
+        public GroupHelper GoToGropPageFromSubmit(IWebDriver webDriver)
+        {
+            webDriver.FindElement(By.LinkText("group page")).Click();
+            return this;
+        }
+        public GroupHelper Create(GroupData groupInfo, IWebDriver webDriver)
+        {                       
+            InitGroupCreation(webDriver);
+            FillGroupForm(groupInfo, webDriver);
+            SubmitGroupCreation(webDriver);
+            GoToGropPageFromSubmit(webDriver);
+            return this;
+        }
+        public GroupHelper Delete(int index, IWebDriver webDriver)
+        {
+            SelectGroup(index, webDriver);
+            DeleteGroup(webDriver);
+            GoToGropPageFromSubmit(webDriver);
+            return this;
+        }
     }
 }
