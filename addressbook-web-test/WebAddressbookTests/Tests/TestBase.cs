@@ -33,16 +33,11 @@ namespace WebAddressbookTests
         [TearDown]
         public void TeardownTest()
         {
-            try
             {
                 app.Stop(driver);
                 app.Stop(driver2);
             }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-            Assert.AreEqual("", verificationErrors.ToString());
+
         }
     }
 }

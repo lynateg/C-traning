@@ -18,20 +18,35 @@ namespace WebAddressbookTests
         protected ContactHelper contactHelper;
         protected IWebDriver driver;
         protected IWebDriver driver2;
-        private StringBuilder verificationErrors;
         protected string baseURL;
 
         public ApplicationManager()
         {
-
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver, baseURL);
-            contactHelper = new ContactHelper(driver);
-            loginHelper = new LoginHelper(driver2);
-            navigator = new NavigationHelper(driver2, baseURL);
-            groupHelper = new GroupHelper(driver2, baseURL);
-            contactHelper = new ContactHelper(driver2);
+           // driver = new FirefoxDriver();
+           // driver2 = new ChromeDriver();
+            baseURL = "http://localhost/addressbook/";
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
+            //loginHelper = new LoginHelper(this);
+            //navigator = new NavigationHelper(driver2, baseURL);
+            //groupHelper = new GroupHelper(driver2, baseURL);
+            //contactHelper = new ContactHelper(driver2);
+        }
+        public IWebDriver Driver 
+        {
+            get
+            {
+                return driver;
+            }
+        }
+        public IWebDriver Driver2
+        {
+            get
+            {
+                return driver2;
+            }
         }
         public void Stop(IWebDriver webDriver)
         {

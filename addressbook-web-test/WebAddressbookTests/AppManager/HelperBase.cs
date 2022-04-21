@@ -13,10 +13,22 @@ namespace WebAddressbookTests
 {
     public class HelperBase
     {
-        protected IWebDriver _webDriver;
-        public HelperBase(IWebDriver webDriver) 
+        protected ApplicationManager _manager;
+        public IWebDriver _driver;
+        public IWebDriver _driver2;
+        private string _baseURL;
+
+        public HelperBase(ApplicationManager manager) 
         {
-            _webDriver = webDriver;
+            _manager = manager;
+            _driver = manager.Driver;
+            _driver2 = manager.Driver2;
+            
+        }
+
+        public HelperBase(IWebDriver webDriver, string baseURL)
+        {
+            _baseURL = baseURL;
         }
     }
 }
