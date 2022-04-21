@@ -26,6 +26,7 @@ namespace WebAddressbookTests
 
         internal GroupHelper Modify(int index, GroupData groupData, IWebDriver webDriver)
         {
+            _manager.Navigator.GoToGroupsPage(webDriver);
             SelectGroup(index, webDriver);
             InitGroupModification(webDriver);
             FillGroupForm(groupData, webDriver);
@@ -80,7 +81,8 @@ namespace WebAddressbookTests
             return this;
         }
         public GroupHelper Create(GroupData groupInfo, IWebDriver webDriver)
-        {                       
+        {
+            _manager.Navigator.GoToGroupsPage(webDriver);
             InitGroupCreation(webDriver);
             FillGroupForm(groupInfo, webDriver);
             SubmitGroupCreation(webDriver);
@@ -89,6 +91,7 @@ namespace WebAddressbookTests
         }
         public GroupHelper Delete(int index, IWebDriver webDriver)
         {
+            _manager.Navigator.GoToGroupsPage(webDriver);
             SelectGroup(index, webDriver);
             DeleteGroup(webDriver);
             GoToGropPageFromSubmit(webDriver);

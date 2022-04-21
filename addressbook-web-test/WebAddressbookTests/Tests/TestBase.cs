@@ -15,9 +15,6 @@ namespace WebAddressbookTests
     {
         protected IWebDriver driver;
         protected IWebDriver driver2;
-        private StringBuilder verificationErrors;
-        protected string baseURL;
-        private bool acceptNextAlert = true;
         protected ApplicationManager app;
 
         [SetUp]       
@@ -26,18 +23,22 @@ namespace WebAddressbookTests
             app = new ApplicationManager();
             driver = new FirefoxDriver();
             driver2 = new ChromeDriver();
-            baseURL = "http://localhost/addressbook/";
-            verificationErrors = new StringBuilder();
-
+            app.Navigator.OpenHomePage(driver);
+            app.Auth.Login(new AccountData("admin", "secret"), driver); 
+            app.Navigator.OpenHomePage(driver2);
+            app.Auth.Login(new AccountData("admin", "secret"), driver2);
         }
         [TearDown]
         public void TeardownTest()
         {
             {
+                app.Navigator.OpenHomePage(driver);
+                app.Navigator.OpenHomePage(driver2);
+                app.Auth.Logout(driver);
+                app.Auth.Logout(driver2);
                 app.Stop(driver);
                 app.Stop(driver2);
             }
-
         }
     }
 }
