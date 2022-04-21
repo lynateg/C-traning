@@ -22,17 +22,12 @@ namespace WebAddressbookTests
 
         public ApplicationManager()
         {
-           // driver = new FirefoxDriver();
-           // driver2 = new ChromeDriver();
             baseURL = "http://localhost/addressbook/";
             loginHelper = new LoginHelper(this);
-            navigator = new NavigationHelper(this, baseURL);
+            navigator = new NavigationHelper(this);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
-            //loginHelper = new LoginHelper(this);
-            //navigator = new NavigationHelper(driver2, baseURL);
-            //groupHelper = new GroupHelper(driver2, baseURL);
-            //contactHelper = new ContactHelper(driver2);
+
         }
         public IWebDriver Driver 
         {
@@ -46,6 +41,13 @@ namespace WebAddressbookTests
             get
             {
                 return driver2;
+            }
+        }
+        public string BaseURL
+        {
+            get
+            {
+                return baseURL;
             }
         }
         public void Stop(IWebDriver webDriver)

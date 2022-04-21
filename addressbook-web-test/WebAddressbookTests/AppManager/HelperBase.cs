@@ -8,27 +8,17 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 
-
 namespace WebAddressbookTests
 {
     public class HelperBase
     {
         protected ApplicationManager _manager;
-        public IWebDriver _driver;
-        public IWebDriver _driver2;
-        private string _baseURL;
-
+        protected string _baseURL;
         public HelperBase(ApplicationManager manager) 
         {
             _manager = manager;
-            _driver = manager.Driver;
-            _driver2 = manager.Driver2;
-            
+            _baseURL = manager.BaseURL;
         }
 
-        public HelperBase(IWebDriver webDriver, string baseURL)
-        {
-            _baseURL = baseURL;
-        }
     }
 }
