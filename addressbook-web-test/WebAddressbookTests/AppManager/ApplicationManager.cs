@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium;
 
 namespace WebAddressbookTests
 {
@@ -17,32 +9,18 @@ namespace WebAddressbookTests
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
         protected IWebDriver driver;
-        protected IWebDriver driver2;
         protected string baseURL;
 
-        public ApplicationManager()
+        public ApplicationManager(IWebDriver webDriver)
         {
             baseURL = "http://localhost/addressbook/";
             loginHelper = new LoginHelper(this);
             navigator = new NavigationHelper(this);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
+            driver = webDriver;
+        }
 
-        }
-        public IWebDriver Driver 
-        {
-            get
-            {
-                return driver;
-            }
-        }
-        public IWebDriver Driver2
-        {
-            get
-            {
-                return driver2;
-            }
-        }
         public string BaseURL
         {
             get
@@ -50,9 +28,9 @@ namespace WebAddressbookTests
                 return baseURL;
             }
         }
-        public void Stop(IWebDriver webDriver)
+        public void Stop()
         {
-            webDriver.Quit();
+            driver.Quit();
         }
         public LoginHelper Auth
         {

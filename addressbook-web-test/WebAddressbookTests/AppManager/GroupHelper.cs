@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium;
+
 
 namespace WebAddressbookTests
 {
     public class GroupHelper : HelperBase
     {
-      
+
         public GroupHelper(ApplicationManager manager)
-            :base(manager)
-        {            
-            
+            : base(manager)
+        {
+
         }
         public GroupHelper DeleteGroup(IWebDriver webDriver)
         {
@@ -74,7 +67,7 @@ namespace WebAddressbookTests
             webDriver.FindElement(By.Name("group_footer")).SendKeys(groupInfo.GroupFooter);
             return this;
         }
-        
+
         public GroupHelper GoToGropPageFromSubmit(IWebDriver webDriver)
         {
             webDriver.FindElement(By.LinkText("group page")).Click();
