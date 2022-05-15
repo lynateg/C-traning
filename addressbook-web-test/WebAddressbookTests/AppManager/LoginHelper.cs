@@ -5,20 +5,24 @@ namespace WebAddressbookTests
 {
     public class LoginHelper : HelperBase
     {
-        public LoginHelper(ApplicationManager manager)
-            : base(manager) { }
-        public void Login(AccountData account, IWebDriver webDriver)
+        private IWebDriver _webDriver;
+        public LoginHelper(ApplicationManager manager, IWebDriver webDriver)
+            : base(manager) 
         {
-            webDriver.FindElement(By.Name("user")).Click();
-            webDriver.FindElement(By.Name("user")).Clear();
-            webDriver.FindElement(By.Name("user")).SendKeys(account.Username);
-            webDriver.FindElement(By.Name("pass")).Clear();
-            webDriver.FindElement(By.Name("pass")).SendKeys(account.Password);
-            webDriver.FindElement(By.XPath("//input[@value='Login']")).Click();
+            _webDriver = webDriver;
         }
-        public void Logout(IWebDriver webDriver)
+        public void Login(AccountData account)
         {
-            webDriver.FindElement(By.LinkText("Logout")).Click();
+            _webDriver.FindElement(By.Name("user")).Click();
+            _webDriver.FindElement(By.Name("user")).Clear();
+            _webDriver.FindElement(By.Name("user")).SendKeys(account.Username);
+            _webDriver.FindElement(By.Name("pass")).Clear();
+            _webDriver.FindElement(By.Name("pass")).SendKeys(account.Password);
+            _webDriver.FindElement(By.XPath("//input[@value='Login']")).Click();
+        }
+        public void Logout()
+        {
+            _webDriver.FindElement(By.LinkText("Logout")).Click();
         }
     }
 }

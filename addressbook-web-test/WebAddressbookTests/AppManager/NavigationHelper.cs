@@ -4,16 +4,19 @@ namespace WebAddressbookTests
 {
     public class NavigationHelper : HelperBase
     {
-        public NavigationHelper(ApplicationManager manager)
+        private IWebDriver _webDriver;
+        public NavigationHelper(ApplicationManager manager, IWebDriver webDriver)
             : base(manager)
-        { }
-        public void OpenHomePage(IWebDriver webDriver)
         {
-            webDriver.Navigate().GoToUrl(this._baseURL);
+            _webDriver = webDriver;
         }
-        public void GoToGroupsPage(IWebDriver webDriver)
+        public void OpenHomePage()
         {
-            webDriver.FindElement(By.LinkText("groups")).Click();
+            _webDriver.Navigate().GoToUrl(this._baseURL);
+        }
+        public void GoToGroupsPage()
+        {
+            _webDriver.FindElement(By.LinkText("groups")).Click();
         }
     }
 }

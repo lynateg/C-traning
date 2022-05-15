@@ -8,17 +8,17 @@ namespace WebAddressbookTests
         [TestCase(TestName = "Добавление контакта")]
         public void ContactAddNew()
         {
-            app.Contacts.New(new UserData("Nail", "Hummer", "Imagine", "Pegasus"), driver);
+            app.Contacts.New(new UserData("Nail", "Hummer", "Imagine", "Pegasus"));
         }
         [TestCase(TestName = "Удаление контакта")]
         public void DeleteContact()
         {
-            app.Contacts.Delete(driver);
+            app.Contacts.Delete();
         }
         [TestCase(TestName = "Изменение контакта")]
         public void ModifyContact()
         {
-            app.Contacts.Modify(new UserData("Tram", "Pam", "Pam", "Ikarus"), driver);
+            app.Contacts.Modify(new UserData("Tram", "Pam", "Pam", "Ikarus"));
         }
 
     }

@@ -14,10 +14,10 @@ namespace WebAddressbookTests
         public ApplicationManager(IWebDriver webDriver)
         {
             baseURL = "http://localhost/addressbook/";
-            loginHelper = new LoginHelper(this);
-            navigator = new NavigationHelper(this);
-            groupHelper = new GroupHelper(this);
-            contactHelper = new ContactHelper(this);
+            loginHelper = new LoginHelper(this, webDriver);
+            navigator = new NavigationHelper(this, webDriver);
+            groupHelper = new GroupHelper(this, webDriver);
+            contactHelper = new ContactHelper(this, webDriver);
             driver = webDriver;
         }
 

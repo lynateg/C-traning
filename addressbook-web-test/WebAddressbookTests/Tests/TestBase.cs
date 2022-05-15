@@ -16,15 +16,15 @@ namespace WebAddressbookTests
             driver = new FirefoxDriver();
             //driver = new ChromeDriver();
             app = new ApplicationManager(driver);
-            app.Navigator.OpenHomePage(driver);
-            app.Auth.Login(new AccountData("admin", "secret"), driver);
+            app.Navigator.OpenHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
         }
         [TearDown]
         public void TeardownTest()
         {
             {
-                app.Navigator.OpenHomePage(driver);
-                app.Auth.Logout(driver);
+                app.Navigator.OpenHomePage();
+                app.Auth.Logout();
                 app.Stop();
             }
         }
