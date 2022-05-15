@@ -7,7 +7,7 @@ namespace WebAddressbookTests
     {
         private IWebDriver _webDriver;
         public ContactHelper(ApplicationManager manager, IWebDriver webDriver)
-            : base(manager) 
+            : base(manager, webDriver) 
         {
             _webDriver = webDriver;
         }
@@ -22,18 +22,10 @@ namespace WebAddressbookTests
         public ContactHelper New(UserData userData)
         {
             _webDriver.FindElement(By.LinkText("add new")).Click();
-            _webDriver.FindElement(By.Name("firstname")).Click();
-            _webDriver.FindElement(By.Name("firstname")).Clear();
-            _webDriver.FindElement(By.Name("firstname")).SendKeys(userData.Firstname);
-            _webDriver.FindElement(By.Name("middlename")).Click();
-            _webDriver.FindElement(By.Name("middlename")).Clear();
-            _webDriver.FindElement(By.Name("middlename")).SendKeys(userData.Middlename);
-            _webDriver.FindElement(By.Name("lastname")).Click();
-            _webDriver.FindElement(By.Name("lastname")).Clear();
-            _webDriver.FindElement(By.Name("lastname")).SendKeys(userData.Lastname);
-            _webDriver.FindElement(By.Name("nickname")).Click();
-            _webDriver.FindElement(By.Name("nickname")).Clear();
-            _webDriver.FindElement(By.Name("nickname")).SendKeys(userData.Nickname);
+            Type(By.Name("firstname"), userData.Firstname);
+            Type(By.Name("middlename"), userData.Middlename);
+            Type(By.Name("lastname"), userData.Lastname);
+            Type(By.Name("nickname"), userData.Nickname);
             ConfirmCreationNewContact();
             return this;
         }

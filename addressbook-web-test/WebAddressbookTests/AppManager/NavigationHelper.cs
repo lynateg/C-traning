@@ -6,7 +6,7 @@ namespace WebAddressbookTests
     {
         private IWebDriver _webDriver;
         public NavigationHelper(ApplicationManager manager, IWebDriver webDriver)
-            : base(manager)
+            : base(manager, webDriver)
         {
             _webDriver = webDriver;
         }

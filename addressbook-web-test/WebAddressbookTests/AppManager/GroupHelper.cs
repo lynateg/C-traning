@@ -7,7 +7,7 @@ namespace WebAddressbookTests
     {
         private IWebDriver _webDriver;
         public GroupHelper(ApplicationManager manager, IWebDriver webDriver)
-            : base(manager)
+            : base(manager, webDriver)
         {
             _webDriver = webDriver;
         }
@@ -56,17 +56,13 @@ namespace WebAddressbookTests
         }
         public GroupHelper FillGroupForm(GroupData groupInfo)
         {
-            _webDriver.FindElement(By.Name("group_name")).Click();
-            _webDriver.FindElement(By.Name("group_name")).Clear();
-            _webDriver.FindElement(By.Name("group_name")).SendKeys(groupInfo.GroupName);
-            _webDriver.FindElement(By.Name("group_header")).Click();
-            _webDriver.FindElement(By.Name("group_header")).Clear();
-            _webDriver.FindElement(By.Name("group_header")).SendKeys(groupInfo.GroupHeader);
-            _webDriver.FindElement(By.Name("group_footer")).Click();
-            _webDriver.FindElement(By.Name("group_footer")).Clear();
-            _webDriver.FindElement(By.Name("group_footer")).SendKeys(groupInfo.GroupFooter);
+            Type(By.Name("group_name"), groupInfo.GroupName);
+            Type(By.Name("group_header"), groupInfo.GroupHeader);
+            Type(By.Name("group_footer"), groupInfo.GroupFooter);
             return this;
         }
+
+
 
         public GroupHelper GoToGropPageFromSubmit()
         {
