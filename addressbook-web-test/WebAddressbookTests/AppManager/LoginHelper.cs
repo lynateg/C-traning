@@ -1,25 +1,54 @@
 ﻿using OpenQA.Selenium;
-
+using System;
 
 namespace WebAddressbookTests
 {
     public class LoginHelper : HelperBase
     {
-        private IWebDriver _webDriver;
-        public LoginHelper(ApplicationManager manager, IWebDriver webDriver)
-            : base(manager, webDriver) 
+        public string baseURL;
+        public LoginHelper(ApplicationManager manager, string baseURL)
+            : base(manager) 
         {
-            _webDriver = webDriver;
+            this.baseURL = baseURL;
+        }
+        public LoginHelper OpenHomePage()
+        {
+            driver.Navigate().GoToUrl(baseURL);
+            return this;
         }
         public void Login(AccountData account)
         {
+            if (IsLoggedIn())
+            {
+                if(IsLoggedIn(account))
+                {
+                    return;
+                }
+                Logout();
+            }
             Type(By.Name("user"), account.Username);
             Type(By.Name("pass"), account.Password);
-            _webDriver.FindElement(By.XPath("//input[@value='Login']")).Click();
+            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
         public void Logout()
         {
-            _webDriver.FindElement(By.LinkText("Logout")).Click();
+            if (IsLoggedIn())
+            {
+                driver.FindElement(By.LinkText("Logout")).Click();
+            }
         }
+        public bool IsLoggedIn(AccountData account)
+        {
+            return IsLoggedIn()
+                && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text 
+                == "(" + account.Username + ")";
+            
+        }
+        public bool IsLoggedIn()
+        {
+            return IsElementPresent(By.Name("logout"));
+        }
+
+
     }
 }

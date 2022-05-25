@@ -13,7 +13,6 @@
             _middlename = middlename;
             _lastname = lastname;
             _nickname = nickname;
-
         }
         public string Firstname
         {

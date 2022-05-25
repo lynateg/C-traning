@@ -1,57 +1,50 @@
 ﻿using OpenQA.Selenium;
-
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
     public class GroupHelper : HelperBase
     {
-        private IWebDriver _webDriver;
-        public GroupHelper(ApplicationManager manager, IWebDriver webDriver)
-            : base(manager, webDriver)
-        {
-            _webDriver = webDriver;
-        }
+        public GroupHelper(ApplicationManager manager)
+            : base(manager)
+        { }
         public GroupHelper DeleteGroup()
         {
-            _webDriver.FindElement(By.XPath("//div[@id='content']/form/input[5]")).Click();
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[5]")).Click();
             return this;
         }
-
         internal GroupHelper Modify(int index, GroupData groupData)
         {
-            _manager.Navigator.GoToGroupsPage();
+            app.Navigator.GoToGroupsPage();
             SelectGroup(index);
             InitGroupModification();
             FillGroupForm(groupData);
             SubmitGroupModification();
             return this;
         }
-
         private GroupHelper SubmitGroupModification()
         {
-            _webDriver.FindElement(By.Name("update")).Click();
+            driver.FindElement(By.Name("update")).Click();
             return this;
         }
-
         private GroupHelper InitGroupModification()
         {
-            _webDriver.FindElement(By.Name("edit")).Click();
+            driver.FindElement(By.Name("edit")).Click();
             return this;
         }
-
         public GroupHelper SelectGroup(int index)
         {
-            _webDriver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
         public GroupHelper InitGroupCreation()
         {
-            _webDriver.FindElement(By.Name("new")).Click();
+            driver.FindElement(By.Name("new")).Click();
             return this;
         }
         public GroupHelper SubmitGroupCreation()
         {
-            _webDriver.FindElement(By.Name("submit")).Click();
+            driver.FindElement(By.Name("submit")).Click();
             return this;
         }
         public GroupHelper FillGroupForm(GroupData groupInfo)
@@ -61,17 +54,14 @@ namespace WebAddressbookTests
             Type(By.Name("group_footer"), groupInfo.GroupFooter);
             return this;
         }
-
-
-
         public GroupHelper GoToGropPageFromSubmit()
         {
-            _webDriver.FindElement(By.LinkText("group page")).Click();
+            driver.FindElement(By.LinkText("group page")).Click();
             return this;
         }
         public GroupHelper Create(GroupData groupInfo)
         {
-            _manager.Navigator.GoToGroupsPage();
+            app.Navigator.GoToGroupsPage();
             InitGroupCreation();
             FillGroupForm(groupInfo);
             SubmitGroupCreation();
@@ -80,11 +70,36 @@ namespace WebAddressbookTests
         }
         public GroupHelper Delete(int index)
         {
-            _manager.Navigator.GoToGroupsPage();
+            if (!app.Groups.IsGroupExist(index))
+            {
+                app.Groups.Create(new GroupData("BBQ", "QQB", "eagle"));
+            }
+            app.Navigator.GoToGroupsPage();
             SelectGroup(index);
             DeleteGroup();
             GoToGropPageFromSubmit();
             return this;
+        }
+        public bool IsGroupExist(int index)
+        {
+            return IsElementPresent(By.XPath("//div[@id='content']/form/span[" + index + "]/input"));
+        }
+
+        public int GetGroupCount()
+        {
+            return driver.FindElements(By.CssSelector("span.group")).Count;
+        }
+
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            app.Navigator.GoToGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+            return groups;
         }
     }
 }

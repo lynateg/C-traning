@@ -6,27 +6,14 @@ using OpenQA.Selenium.Firefox;
 namespace WebAddressbookTests
 {
     public class TestBase
-    {
-        protected IWebDriver driver;
+    {       
         protected ApplicationManager app;
 
         [SetUp]
-        public void SetupTest()
+        public void SetupApplicationManager()
         {
-            driver = new FirefoxDriver();
-            //driver = new ChromeDriver();
-            app = new ApplicationManager(driver);
-            app.Navigator.OpenHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
+            app = ApplicationManager.GetInstance();
         }
-        [TearDown]
-        public void TeardownTest()
-        {
-            {
-                app.Navigator.OpenHomePage();
-                app.Auth.Logout();
-                app.Stop();
-            }
-        }
+
     }
 }

@@ -3,23 +3,31 @@ namespace WebAddressbookTests
 {
     public class HelperBase
     {
-        protected ApplicationManager _manager;
-        protected string _baseURL;
-        private IWebDriver _webDriver;
-        public HelperBase(ApplicationManager manager, IWebDriver webDriver)
+        protected ApplicationManager app;
+        protected IWebDriver driver;
+        public HelperBase(ApplicationManager manager)
         {
-            _manager = manager;
-            _baseURL = manager.BaseURL;
-            _webDriver = webDriver;
+            this.app = manager;
+            this.driver = app.Driver;
         }
-
         public void Type(By locator, string text)
         {
             if (text != null)
             {
-                _webDriver.FindElement(locator).Click();
-                _webDriver.FindElement(locator).Clear();
-                _webDriver.FindElement(locator).SendKeys(text);
+                driver.FindElement(locator).Click();
+                driver.FindElement(locator).SendKeys(text);
+            }            
+        }
+        public bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
             }
         }
     }

@@ -3,7 +3,7 @@
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactsTests : TestBase
+    public class ContactsTests : AuthTestBase
     {
         [TestCase(TestName = "Добавление контакта")]
         public void ContactAddNew()
@@ -13,7 +13,7 @@ namespace WebAddressbookTests
         [TestCase(TestName = "Удаление контакта")]
         public void DeleteContact()
         {
-            app.Contacts.Delete();
+            app.Contacts.Delete(1);
         }
         [TestCase(TestName = "Изменение контакта")]
         public void ModifyContact()

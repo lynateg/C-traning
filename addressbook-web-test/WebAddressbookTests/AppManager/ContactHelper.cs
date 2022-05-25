@@ -1,27 +1,37 @@
-﻿using OpenQA.Selenium;
-
+﻿using System;
+using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System.Threading;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
-    {
-        private IWebDriver _webDriver;
-        public ContactHelper(ApplicationManager manager, IWebDriver webDriver)
-            : base(manager, webDriver) 
+    {        
+        public ContactHelper(ApplicationManager manager)
+            : base(manager) 
+        {}
+        public ContactHelper Delete(int i)
         {
-            _webDriver = webDriver;
-        }
-
-        public ContactHelper Delete()
-        {
-            SelectContact();
+            if (!app.Contacts.IsContactExist(i))
+            {
+                app.Contacts.New(new UserData("OLO", "BBQ", "gg","eagle"));
+            }
+            SelectContact(i);
             InitDeleteContact();
             CloseAlertWindow();
             return this;
         }
         public ContactHelper New(UserData userData)
         {
-            _webDriver.FindElement(By.LinkText("add new")).Click();
+            driver.FindElement(By.LinkText("add new")).Click();
             Type(By.Name("firstname"), userData.Firstname);
             Type(By.Name("middlename"), userData.Middlename);
             Type(By.Name("lastname"), userData.Lastname);
@@ -31,46 +41,54 @@ namespace WebAddressbookTests
         }
         public ContactHelper UpdateModification()
         {
-            _webDriver.FindElement(By.XPath("/html/body/div/div[4]/form[1]/input[1]")).Click();
+            driver.FindElement(By.XPath("/html/body/div/div[4]/form[1]/input[1]")).Click();
             return this;
         }
-        public ContactHelper InitModification()
+        public ContactHelper InitModification(int index)
         {
-            _webDriver.FindElement(By.XPath("/html/body/div[1]/div[4]/form[2]/table/tbody/tr[4]/td[8]/a/img")).Click();
+            if (!app.Contacts.IsContactExist(index))
+            {                
+                app.Contacts.New(new UserData("modifyname", "modifymidname", "modifylastname", "modifynickname"));
+            }
+            driver.FindElement(By.XPath("(//img[@title='Edit'])[" + (index) + "]")).Click();
             return this;
         }
         public ContactHelper GoToHomePage()
         {
-            _webDriver.FindElement(By.LinkText("home page")).Click();
+            driver.FindElement(By.LinkText("home page")).Click();
             return this;
         }
         public ContactHelper InitDeleteContact()
         {
-            _webDriver.FindElement(By.XPath("//*[@id='content']/form[2]/div[2]/input")).Click();
+            driver.FindElement(By.XPath("//*[@id='content']/form[2]/div[2]/input")).Click();
             return this;
         }
-        public ContactHelper SelectContact()
+        public ContactHelper SelectContact(int index)
         {
-            _webDriver.FindElement(By.XPath("/html/body/div[1]/div[4]/form[2]/table/tbody/tr[3]/td[1]/input")).Click();
+            driver.FindElement(By.XPath("//tr[@name='entry'][" + (index) + "]/ td/input")).Click();
             return this;
         }
         public ContactHelper CloseAlertWindow()
         {
-            _webDriver.SwitchTo().Alert().Accept();
+            driver.SwitchTo().Alert().Accept();
             return this;
         }
         public ContactHelper ConfirmCreationNewContact()
         {
-            _webDriver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
             return this;
         }
         public ContactHelper Modify(UserData userData)
         {
-            _manager.Navigator.OpenHomePage();
-            InitModification();
+            app.Auth.OpenHomePage();
+            InitModification(1);
             New(userData);
             GoToHomePage();
             return this;
+        }
+        public bool IsContactExist(int index)
+        {
+            return IsElementPresent(By.XPath("//tr[@name='entry'][" + (index) + "]//img[@title='Edit']"));
         }
     }
 }
