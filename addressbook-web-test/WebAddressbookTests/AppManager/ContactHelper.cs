@@ -65,7 +65,7 @@ namespace WebAddressbookTests
         }
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("//tr[@name='entry'][" + (index) + "]/ td/input")).Click();
+            driver.FindElement(By.XPath("//tr[@name='entry'][" + index + "]/ td/input")).Click();
             return this;
         }
         public ContactHelper CloseAlertWindow()

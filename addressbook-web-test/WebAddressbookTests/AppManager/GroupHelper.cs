@@ -97,7 +97,7 @@ namespace WebAddressbookTests
             ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
             foreach (IWebElement element in elements)
             {
-                groups.Add(new GroupData(element.Text));
+                groups.Add(new GroupData(element.Text, element.TagName));
             }
             return groups;
         }

@@ -15,6 +15,8 @@ namespace WebAddressbookTests
 
     public class GroupTests : AuthTestBase
     {
+        private GroupData groupinfo;
+
         [TestCase(TestName = "Добавление группы контактов")]
         //[Test]
         public void GroupCreationTest()
@@ -22,18 +24,20 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             
             app.Groups.Create(new GroupData("xxx", "zzz", "yyy"));
+            groupinfo = new GroupData("xxx", "zzz", "yyy");
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups.Add(new GroupData("xxx", "zzz", "yyy"));
+            oldGroups.Add(groupinfo);
             oldGroups.Sort();
             newGroups.Sort();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            Assert.AreEqual(oldGroups.Count, newGroups.Count);
         }
         [TestCase(TestName = "Добавление пустой группы контактов")]
         public void EmptyGroupCreationTest()
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Create(new GroupData("", "", ""));
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
             Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }

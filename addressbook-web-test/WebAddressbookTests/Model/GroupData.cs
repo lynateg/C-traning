@@ -8,10 +8,12 @@ namespace WebAddressbookTests
         private string _groupHeader;
         private string _groupFooter;
         private string name;
+        private string text;
 
-        public GroupData(string text)
+        public GroupData(string text, string name)
         {
-            this.name = text;
+            this.text = text;
+            this.name = name;
         }
 
         public bool Equals(GroupData other)
