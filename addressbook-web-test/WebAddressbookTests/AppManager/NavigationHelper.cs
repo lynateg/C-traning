@@ -6,23 +6,41 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
     public class NavigationHelper : HelperBase
     {
-        
-        public NavigationHelper(ApplicationManager manager)
+        protected string baseURL;
+        public NavigationHelper(ApplicationManager manager, string baseURL)
             : base(manager)
-        { }
-        public void OpenHomePage(IWebDriver webDriver)
-        {
-            webDriver.Navigate().GoToUrl(this._baseURL);
+        { this.baseURL = baseURL;   }
+        public void OpenHomePage()
+        {            
+            if (driver.Url == baseURL)
+            {
+                return;
+            }
+            driver.Navigate().GoToUrl(baseURL);
         }
-        public void GoToGroupsPage(IWebDriver webDriver)
+        public void GoToGroupsPage()
         {
-            webDriver.FindElement(By.LinkText("groups")).Click();
+            if (driver.Url == baseURL + "group.php"
+               && IsElementPresent(By.Name("group page")))
+            {
+                return;
+            }
+            driver.FindElement(By.LinkText("groups")).Click();
+        }
+        public void GoToNewContactPage()
+        {
+            if (driver.Url == baseURL + "edit.php"
+                && IsElementPresent(By.XPath("//*[@id='content']/form/input[7]")))
+            {
+                return;
+            }
+            driver.FindElement(By.LinkText("add new")).Click();
         }
     }
 }

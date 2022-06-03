@@ -1,87 +1,88 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
-    {
+    {        
         public ContactHelper(ApplicationManager manager)
-            : base(manager) { }
-
-        public ContactHelper Delete(IWebDriver webDriver)
+            : base(manager) 
+        {}
+        
+        public ContactHelper Delete(int i)
         {
-            SelectContact(webDriver);
-            InitDeleteContact(webDriver);
-            CloseAlertWindow(webDriver);
+            app.Auth.OpenHomePage();
+            SelectContact(i);
+            InitDeleteContact();
+            CloseAlertWindow();
             return this;
         }
-        public ContactHelper New(UserData userData, IWebDriver webDriver)
+        public ContactHelper New(UserData userData)
         {
-            webDriver.FindElement(By.LinkText("add new")).Click();
-            webDriver.FindElement(By.Name("firstname")).Click();
-            webDriver.FindElement(By.Name("firstname")).Clear();
-            webDriver.FindElement(By.Name("firstname")).SendKeys(userData.Firstname);
-            webDriver.FindElement(By.Name("middlename")).Click();
-            webDriver.FindElement(By.Name("middlename")).Clear();
-            webDriver.FindElement(By.Name("middlename")).SendKeys(userData.Middlename);
-            webDriver.FindElement(By.Name("lastname")).Click();
-            webDriver.FindElement(By.Name("lastname")).Clear();
-            webDriver.FindElement(By.Name("lastname")).SendKeys(userData.Lastname);
-            webDriver.FindElement(By.Name("nickname")).Click();
-            webDriver.FindElement(By.Name("nickname")).Clear();
-            webDriver.FindElement(By.Name("nickname")).SendKeys(userData.Nickname);
-            ConfirmCreationNewContact(webDriver);
+            driver.FindElement(By.LinkText("add new")).Click();
+            Type(By.Name("firstname"), userData.Firstname);
+            Type(By.Name("middlename"), userData.Middlename);
+            Type(By.Name("lastname"), userData.Lastname);
+            Type(By.Name("nickname"), userData.Nickname);
+            ConfirmCreationNewContact();
             return this;
         }
-        public ContactHelper UpdateModification(IWebDriver webDriver)
+        public ContactHelper UpdateModification()
         {
-            webDriver.FindElement(By.XPath("/html/body/div/div[4]/form[1]/input[1]")).Click();
+            driver.FindElement(By.XPath("//*[@id='content']/form[2]/div[2]/input")).Click();
             return this;
         }
-        public ContactHelper InitModification(IWebDriver webDriver)
+        public ContactHelper InitModification(int index)
         {
-            webDriver.FindElement(By.XPath("/html/body/div[1]/div[4]/form[2]/table/tbody/tr[4]/td[8]/a/img")).Click();
+            driver.FindElement(By.XPath("(//img[@title='Edit'])[" + (index) + "]")).Click();
             return this;
         }
-        public ContactHelper GoToHomePage(IWebDriver webDriver)
+        public ContactHelper GoToHomePage()
         {
-            webDriver.FindElement(By.LinkText("home page")).Click();
+            driver.FindElement(By.LinkText("home page")).Click();
             return this;
         }
-        public ContactHelper InitDeleteContact(IWebDriver webDriver)
+        public ContactHelper InitDeleteContact()
         {
-            webDriver.FindElement(By.XPath("//*[@id='content']/form[2]/div[2]/input")).Click();
+            driver.FindElement(By.XPath("//*[@id='content']/form[2]/div[2]/input")).Click();
             return this;
         }
-        public ContactHelper SelectContact(IWebDriver webDriver)
+        public ContactHelper SelectContact(int index)
         {
-            webDriver.FindElement(By.XPath("/html/body/div[1]/div[4]/form[2]/table/tbody/tr[3]/td[1]/input")).Click();
+            driver.FindElement(By.XPath("//tr[@name='entry'][" + (index+1) + "]/ td/input")).Click();
             return this;
         }
-        public ContactHelper CloseAlertWindow(IWebDriver webDriver)
+        public ContactHelper CloseAlertWindow()
         {
-            webDriver.SwitchTo().Alert().Accept();
+            driver.SwitchTo().Alert().Accept();
             return this;
         }
-        public ContactHelper ConfirmCreationNewContact(IWebDriver webDriver)
+        public ContactHelper ConfirmCreationNewContact()
         {
-            webDriver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
             return this;
         }
-        public ContactHelper Modify(UserData userData, IWebDriver webDriver)
+        public ContactHelper Modify(UserData userData)
         {
-            _manager.Navigator.OpenHomePage(webDriver);
-            InitModification(webDriver);
-            New(userData, webDriver);
-            GoToHomePage(webDriver);
+            app.Auth.OpenHomePage();
+            InitModification(1);
+            New(userData);
+            GoToHomePage();
             return this;
+        }
+        public bool IsContactExist(int index)
+        {
+            return IsElementPresent(By.XPath("//tr[@name='entry'][" + (index) + "]//img[@title='Edit']"));
         }
     }
 }
