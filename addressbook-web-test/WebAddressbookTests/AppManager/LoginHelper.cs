@@ -1,55 +1,31 @@
-﻿using OpenQA.Selenium;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
 
 namespace WebAddressbookTests
 {
     public class LoginHelper : HelperBase
     {
-        public string baseURL;
-        public LoginHelper(ApplicationManager manager, string baseURL)
-            : base(manager) 
+        public LoginHelper(ApplicationManager manager)
+            : base(manager) { }
+        public void Login(AccountData account, IWebDriver webDriver)
         {
-            this.baseURL = baseURL;
+            webDriver.FindElement(By.Name("user")).Click();
+            webDriver.FindElement(By.Name("user")).Clear();
+            webDriver.FindElement(By.Name("user")).SendKeys(account.Username);
+            webDriver.FindElement(By.Name("pass")).Clear();
+            webDriver.FindElement(By.Name("pass")).SendKeys(account.Password);
+            webDriver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
-        public LoginHelper OpenHomePage()
+        public void Logout(IWebDriver webDriver)
         {
-            driver.Navigate().GoToUrl(baseURL);
-            return this;
+            webDriver.FindElement(By.LinkText("Logout")).Click();
         }
-        public void Login(AccountData account)
-        {
-            if (IsLoggedIn())
-            {
-                if(IsLoggedIn(account))
-                {
-                    return;
-                }
-                Logout();
-            }
-            Type(By.Name("user"), account.Username);
-            Type(By.Name("pass"), account.Password);
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-        }
-        public void Logout()
-        {
-            if (IsLoggedIn())
-            {
-                driver.FindElement(By.LinkText("Logout")).Click();
-                driver.FindElement(By.Name("user"));
-            }
-        }
-        public bool IsLoggedIn(AccountData account)
-        {
-            return IsLoggedIn()
-                && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text 
-                == "(" + account.Username + ")";
-            
-        }
-        public bool IsLoggedIn()
-        {
-            return IsElementPresent(By.Name("logout"));
-        }
-
-
     }
 }
