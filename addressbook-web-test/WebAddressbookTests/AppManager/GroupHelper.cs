@@ -93,11 +93,7 @@ namespace WebAddressbookTests
             ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
             foreach (IWebElement element in elements)
             {
-                if (!string.IsNullOrEmpty(element.Text) && !string.IsNullOrEmpty(element.TagName))
-                {
-                    groups.Add(new GroupData(element.Text, element.TagName));
-                }
-            
+                groups.Add(new GroupData(element.Text, element.TagName));            
             }
             return groups;
         }
