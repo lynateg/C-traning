@@ -13,6 +13,7 @@ namespace WebAddressbookTests
         [TestCase(TestName = "Логин с неверными данными")]
         public void LoginWithInvalidCredintals()
         {
+            app.Auth.OpenHomePage();
             //prep
             app.Auth.Logout();
             //act
@@ -20,10 +21,12 @@ namespace WebAddressbookTests
             app.Auth.Login(account);
             //test
             Assert.IsFalse(app.Auth.IsLoggedIn(account));
+
         }
         [TestCase(TestName = "Логин с верными данными")]
         public void LoginWithValidCredintals()
         {
+            app.Auth.OpenHomePage();
             //prep
             app.Auth.Logout();
             //act
@@ -31,6 +34,7 @@ namespace WebAddressbookTests
             app.Auth.Login(account);
             //test
             Assert.IsTrue(app.Auth.IsLoggedIn(account));
+
         }
 
     }

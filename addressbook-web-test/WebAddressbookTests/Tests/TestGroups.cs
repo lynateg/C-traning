@@ -57,6 +57,10 @@ namespace WebAddressbookTests
         [TestCase(TestName = "Удаление группы 1")]
         public void RemoveGroup()
         {
+            if (!app.Groups.IsGroupExist(1))
+            {
+                app.Groups.Create(new GroupData("BBQ", "QQB", "eagle"));
+            }
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Delete(1);
             List<GroupData> newGroups = app.Groups.GetGroupList();

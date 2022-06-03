@@ -18,12 +18,10 @@ namespace WebAddressbookTests
         public ContactHelper(ApplicationManager manager)
             : base(manager) 
         {}
+        
         public ContactHelper Delete(int i)
         {
-            if (!app.Contacts.IsContactExist(i))
-            {
-                app.Contacts.New(new UserData("OLO", "BBQ", "gg","eagle"));
-            }
+            app.Auth.OpenHomePage();
             SelectContact(i);
             InitDeleteContact();
             CloseAlertWindow();
@@ -41,15 +39,11 @@ namespace WebAddressbookTests
         }
         public ContactHelper UpdateModification()
         {
-            driver.FindElement(By.XPath("/html/body/div/div[4]/form[1]/input[1]")).Click();
+            driver.FindElement(By.XPath("//*[@id='content']/form[2]/div[2]/input")).Click();
             return this;
         }
         public ContactHelper InitModification(int index)
         {
-            if (!app.Contacts.IsContactExist(index))
-            {                
-                app.Contacts.New(new UserData("modifyname", "modifymidname", "modifylastname", "modifynickname"));
-            }
             driver.FindElement(By.XPath("(//img[@title='Edit'])[" + (index) + "]")).Click();
             return this;
         }
@@ -65,7 +59,7 @@ namespace WebAddressbookTests
         }
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("//tr[@name='entry'][" + index + "]/ td/input")).Click();
+            driver.FindElement(By.XPath("//tr[@name='entry'][" + (index+1) + "]/ td/input")).Click();
             return this;
         }
         public ContactHelper CloseAlertWindow()

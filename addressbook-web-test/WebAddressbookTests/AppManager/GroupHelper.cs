@@ -69,11 +69,7 @@ namespace WebAddressbookTests
             return this;
         }
         public GroupHelper Delete(int index)
-        {
-            if (!app.Groups.IsGroupExist(index))
-            {
-                app.Groups.Create(new GroupData("BBQ", "QQB", "eagle"));
-            }
+        {            
             app.Navigator.GoToGroupsPage();
             SelectGroup(index);
             DeleteGroup();
@@ -97,7 +93,11 @@ namespace WebAddressbookTests
             ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
             foreach (IWebElement element in elements)
             {
-                groups.Add(new GroupData(element.Text, element.TagName));
+                if (!string.IsNullOrEmpty(element.Text) && !string.IsNullOrEmpty(element.TagName))
+                {
+                    groups.Add(new GroupData(element.Text, element.TagName));
+                }
+            
             }
             return groups;
         }
