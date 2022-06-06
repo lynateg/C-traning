@@ -35,6 +35,7 @@ namespace WebAddressbookTests
             Type(By.Name("lastname"), userData.Lastname);
             Type(By.Name("nickname"), userData.Nickname);
             ConfirmCreationNewContact();
+            //GoToHomePage();
             return this;
         }
         public ContactHelper UpdateModification()
@@ -83,6 +84,19 @@ namespace WebAddressbookTests
         public bool IsContactExist(int index)
         {
             return IsElementPresent(By.XPath("//tr[@name='entry'][" + (index) + "]//img[@title='Edit']"));
+        }
+        public List<UserData> GetContactList()
+        {
+
+            List<UserData> contact = new List<UserData>();
+            app.Navigator.OpenHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+            foreach (IWebElement element in elements)
+            {
+                contact.Add(new UserData(element.FindElement(By.XPath("./td[3]")).Text ,
+                    element.FindElement(By.XPath("./td[2]")).Text));
+            }
+            return contact;
         }
     }
 }

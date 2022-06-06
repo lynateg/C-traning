@@ -4,16 +4,13 @@ namespace WebAddressbookTests
 {
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
-        private string _groupName;
-        private string _groupHeader;
-        private string _groupFooter;
-        private string name;
-        private string text;
-
-        public GroupData(string text, string name)
-        {
-            this.text = text;
-            this.name = name;
+        public string _groupName;
+        public string _groupHeader;
+        public string _groupFooter;
+       
+        public GroupData(string _groupName)
+        {            
+            this._groupName = _groupName;
         }
 
         public bool Equals(GroupData other)
@@ -26,15 +23,15 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return name == other.name;
+            return _groupName == other._groupName;
         }
         public override int GetHashCode()
         {
-            return name.GetHashCode();
+            return _groupName.GetHashCode();
         }
         public override string ToString()
         {
-            return "name=" + name;
+            return "name=" + _groupName;
         }
         public int CompareTo(GroupData other)
         {
@@ -42,7 +39,7 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
-            return name.CompareTo(other.name);
+            return _groupName.CompareTo(other._groupName);
         }
 
         public GroupData(string groupName, string groupHeader, string groupFooter)

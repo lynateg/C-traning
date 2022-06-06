@@ -88,12 +88,13 @@ namespace WebAddressbookTests
 
         public List<GroupData> GetGroupList()
         {
+
             List<GroupData> groups = new List<GroupData>();
             app.Navigator.GoToGroupsPage();
             ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
             foreach (IWebElement element in elements)
             {
-                groups.Add(new GroupData(element.Text, element.TagName));            
+                groups.Add(new GroupData(element.Text));            
             }
             return groups;
         }

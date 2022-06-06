@@ -24,35 +24,56 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             
             app.Groups.Create(new GroupData("xxx", "zzz", "yyy"));
-            //groupinfo = new GroupData("xxx", "zzz", "yyy");
+            groupinfo = new GroupData("xxx", "zzz", "yyy");
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            //oldGroups.Add(groupinfo);
-            //oldGroups.Sort();
-            //newGroups.Sort();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            oldGroups.Add(groupinfo);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
         [TestCase(TestName = "Добавление пустой группы контактов")]
         public void EmptyGroupCreationTest()
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+            
             app.Groups.Create(new GroupData("", "", ""));
-
+            groupinfo = new GroupData("", "", "");
+            
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            oldGroups.Add(groupinfo);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
         [TestCase(TestName = "Добавление неправильной группы контактов")]
         public void BadNameGroupCreationTest()
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+           
             app.Groups.Create(new GroupData("f'f", "q'q", ""));
+            
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            Assert.AreNotEqual(oldGroups.Count + 1, newGroups.Count);
+            oldGroups.Add(groupinfo);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreNotEqual(oldGroups, newGroups);
         }
         [TestCase(TestName = "Модификация группы контактов")]
         public void GroupModificationTest()
-        {
-            app.Groups.Modify(1, new GroupData("ooo", "ppp", "jjj"));
+        {            
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            
+            app.Groups.Modify(1, new GroupData("ooo", null, null));
+            groupinfo = new GroupData("ooo", null, null);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups[1]._groupName=groupinfo._groupName;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+
+
         }
         [TestCase(TestName = "Удаление группы 1")]
         public void RemoveGroup()
@@ -62,10 +83,10 @@ namespace WebAddressbookTests
                 app.Groups.Create(new GroupData("BBQ", "QQB", "eagle"));
             }
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+            GroupData GroupRemoved = oldGroups[1];
             app.Groups.Delete(1);
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups.RemoveAt(0);
-
+            oldGroups.RemoveAt(1);
             Assert.AreEqual(oldGroups, newGroups);
         }
        
