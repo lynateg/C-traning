@@ -21,7 +21,7 @@ namespace WebAddressbookTests
             newContact.Sort();
             Assert.AreEqual(oldContact, newContact);
         }
-        [TestCase(TestName = "Удаление контакта"),Order(3)]
+        [TestCase(TestName = "Удаление контакта"),Order(2)]
         public void DeleteContact()
         {
             
@@ -36,7 +36,7 @@ namespace WebAddressbookTests
             oldContact.RemoveAt(1);
             Assert.AreEqual(oldContact, newContact);
         }
-        [TestCase(TestName = "Изменение контакта"),Order(2)]
+        [TestCase(TestName = "Изменение контакта"),Order(3)]
         
         public void ModifyContact()
         {

@@ -26,6 +26,8 @@ namespace WebAddressbookTests
             app.Groups.Create(new GroupData("xxx", "zzz", "yyy"));
             groupinfo = new GroupData("xxx", "zzz", "yyy");
 
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.Add(groupinfo);
             oldGroups.Sort();
@@ -39,7 +41,9 @@ namespace WebAddressbookTests
             
             app.Groups.Create(new GroupData("", "", ""));
             groupinfo = new GroupData("", "", "");
-            
+
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.Add(groupinfo);
             oldGroups.Sort();
@@ -52,7 +56,9 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
            
             app.Groups.Create(new GroupData("f'f", "q'q", ""));
-            
+
+            Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.Add(groupinfo);
             oldGroups.Sort();
@@ -67,11 +73,13 @@ namespace WebAddressbookTests
             app.Groups.Modify(1, new GroupData("ooo", null, null));
             groupinfo = new GroupData("ooo", null, null);
 
+            Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups[1]._groupName=groupinfo._groupName;
             oldGroups.Sort();
             newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
+            Assert.AreNotEqual(oldGroups, newGroups);
 
 
         }
@@ -85,6 +93,7 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             GroupData GroupRemoved = oldGroups[1];
             app.Groups.Delete(1);
+            Assert.AreEqual(oldGroups.Count-1, app.Groups.GetGroupCount());
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.RemoveAt(1);
             Assert.AreEqual(oldGroups, newGroups);

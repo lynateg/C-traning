@@ -25,6 +25,7 @@ namespace WebAddressbookTests
             SelectContact(i);
             InitDeleteContact();
             CloseAlertWindow();
+            app.Auth.OpenHomePage();
             return this;
         }
         public ContactHelper New(UserData userData)
@@ -41,6 +42,7 @@ namespace WebAddressbookTests
         public ContactHelper UpdateModification()
         {
             driver.FindElement(By.XPath("//*[@id='content']/form[2]/div[2]/input")).Click();
+            contactCache = null;
             return this;
         }
         public ContactHelper InitModification(int index)
@@ -56,6 +58,7 @@ namespace WebAddressbookTests
         public ContactHelper InitDeleteContact()
         {
             driver.FindElement(By.XPath("//*[@id='content']/form[2]/div[2]/input")).Click();
+            contactCache = null;
             return this;
         }
         public ContactHelper SelectContact(int index)
@@ -65,12 +68,13 @@ namespace WebAddressbookTests
         }
         public ContactHelper CloseAlertWindow()
         {
-            driver.SwitchTo().Alert().Accept();
+            driver.SwitchTo().Alert().Accept();            
             return this;
         }
         public ContactHelper ConfirmCreationNewContact()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            contactCache = null;
             return this;
         }
         public ContactHelper Modify(UserData userData)
@@ -85,18 +89,21 @@ namespace WebAddressbookTests
         {
             return IsElementPresent(By.XPath("//tr[@name='entry'][" + (index) + "]//img[@title='Edit']"));
         }
+        private List<UserData> contactCache = null;
         public List<UserData> GetContactList()
         {
-
-            List<UserData> contact = new List<UserData>();
-            app.Navigator.OpenHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
-            foreach (IWebElement element in elements)
+            if (contactCache == null)
             {
-                contact.Add(new UserData(element.FindElement(By.XPath("./td[3]")).Text ,
-                    element.FindElement(By.XPath("./td[2]")).Text));
+                contactCache = new List<UserData>();
+                app.Navigator.OpenHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+                foreach (IWebElement element in elements)
+                {
+                    contactCache.Add(new UserData(element.FindElement(By.XPath("./td[3]")).Text,
+                        element.FindElement(By.XPath("./td[2]")).Text));
+                }
             }
-            return contact;
-        }
+            return new List<UserData>(contactCache);
+        }              
     }
 }
