@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
@@ -6,12 +7,13 @@ namespace WebAddressbookTests
     public class UserData : IEquatable<UserData>, IComparable<UserData>
     {
         public string _firstname;
-        public string _middlename;
+        //public string _middlename;
         public string _lastname;
-        public string _nickname;
-        private string allPhones;
-        private string allEmails;
-        private string allContactDetails;
+        //public string _nickname;
+        public string allPhones;
+        public string allEmails;
+        private string allContactData;
+
 
         public UserData(string _firstname, string _lastname)
         {
@@ -21,11 +23,17 @@ namespace WebAddressbookTests
         public UserData(string firstname, string middlename, string lastname, string nickname)
         {
             _firstname = firstname;
-            _middlename = middlename;
+            //_middlename = middlename;
             _lastname = lastname;
-            _nickname = nickname;
+            //_nickname = nickname;
         }
-
+        public UserData()
+        {
+        }
+        public UserData(string allContactData)
+        {
+            AllContactData = allContactData;
+        }
         public bool Equals(UserData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -98,17 +106,17 @@ namespace WebAddressbookTests
                 _firstname = value;
             }
         }
-        public string Middlename
-        {
-            get
-            {
-                return _middlename;
-            }
-            set
-            {
-                _middlename = value;
-            }
-        }
+        //public string Middlename
+        //{
+        //    get
+        //    {
+        //        return _middlename;
+        //    }
+        //    set
+        //    {
+        //        _middlename = value;
+        //    }
+        //}
         public string Lastname
         {
             get
@@ -120,17 +128,17 @@ namespace WebAddressbookTests
                 _lastname = value;
             }
         }
-        public string Nickname
-        {
-            get
-            {
-                return _nickname;
-            }
-            set
-            {
-                _nickname = value;
-            }
-        }
+        //public string Nickname
+        //{
+        //    get
+         //   {
+         //       return _nickname;
+        //    }
+         //   set
+         //   {
+        //        _nickname = value;
+        //    }
+       // }
         public string Email { get; set; }
         public string Email2 { get; set; }
         public string Email3 { get; set; }
@@ -175,68 +183,68 @@ namespace WebAddressbookTests
                 allEmails = value;
             }
         }
-        public string AllContactDetails
+        public string AllContactData
         {
             get
             {
-                if (allContactDetails != null || allContactDetails != "")
+                if (!string.IsNullOrEmpty(allContactData))
                 {
-                    return allContactDetails;
+                    return allContactData;
                 }
                 else
                 {
-                    allContactDetails = "";
-                    if (_firstname == null || _firstname == "")
+                    var sb = new StringBuilder(string.Empty);
+                    if (!string.IsNullOrEmpty(_firstname))
                     {
-                        allContactDetails += _firstname + " ";
+                        sb.Append(_firstname + " ");
                     }
 
-                    if (_lastname == null || _lastname == "")
+                    if (!string.IsNullOrEmpty(_lastname))
                     {
-                        allContactDetails += _lastname + "\r\n";
+                        sb.Append(_lastname + "\r\n");
                     }
 
-                    if (Address == null || Address == "")
+                    if (!string.IsNullOrEmpty(Address))
                     {
-                        allContactDetails += Address + "\r\n\r\n";
+                        sb.Append(Address + "\r\n\r\n");
                     }
 
-                    if (HomePhone == null || HomePhone == "")
+                    if (!string.IsNullOrEmpty(HomePhone))
                     {
-                        allContactDetails += "H: " + HomePhone + "\r\n";
+                        sb.Append("H: " + HomePhone + "\r\n");
                     }
 
-                    if (MobilePhone == null || MobilePhone == "")
+                    if (!string.IsNullOrEmpty(MobilePhone))
                     {
-                        allContactDetails += "M: " + MobilePhone + "\r\n";
+                        sb.Append("M: " + MobilePhone + "\r\n");
                     }
 
-                    if (WorkPhone == null || WorkPhone == "")
+                    if (!string.IsNullOrEmpty(WorkPhone))
                     {
-                        allContactDetails += "W: " + WorkPhone + "\r\n";
+                        sb.Append("W: " + WorkPhone + "\r\n");
                     }
 
-                    if (Email == null || Email == "")
+                    if (!string.IsNullOrEmpty(Email))
                     {
-                        allContactDetails += Email + "\r\n";
+                        sb.Append(Email + "\r\n");
                     }
 
-                    if (Email2 == null || Email2 == "")
+                    if (!string.IsNullOrEmpty(Email2))
                     {
-                        allContactDetails += Email2 + "\r\n";
+                        sb.Append(Email2 + "\r\n");
                     }
 
-                    if (Email3 == null || Email3 == "")
+                    if (!string.IsNullOrEmpty(Email3))
                     {
-                        allContactDetails += Email3;
+                        sb.Append(Email3);
                     }
 
-                    return allContactDetails.Trim();
+                    return sb.ToString().Trim();
                 }
             }
             set
             {
-                allContactDetails = value;
+                allContactData = value;
             }
         }
     }

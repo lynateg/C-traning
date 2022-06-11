@@ -34,9 +34,9 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.LinkText("add new")).Click();
             Type(By.Name("firstname"), userData.Firstname);
-            Type(By.Name("middlename"), userData.Middlename);
+            //Type(By.Name("middlename"), userData.Middlename);
             Type(By.Name("lastname"), userData.Lastname);
-            Type(By.Name("nickname"), userData.Nickname);
+            //Type(By.Name("nickname"), userData.Nickname);
             ConfirmCreationNewContact();
             //GoToHomePage();
             return this;
@@ -131,7 +131,7 @@ namespace WebAddressbookTests
         {
             app.Navigator.OpenHomePage();
             InitModification(index);
-          
+
             string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
@@ -144,7 +144,7 @@ namespace WebAddressbookTests
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
 
-            return new UserData(firstName, lastName)
+            var x = new UserData(firstName, lastName)
             {
                 Address = address,
                 HomePhone = homePhone,
@@ -153,7 +153,8 @@ namespace WebAddressbookTests
                 Email = email,
                 Email2 = email2,
                 Email3 = email3
-            };           
+            };
+            return x;       
         }
         public int GetNumberOfSearchResults()
         {
@@ -161,6 +162,26 @@ namespace WebAddressbookTests
             string text = driver.FindElement(By.TagName("label")).Text;
             Match m = new Regex(@"\d+").Match(text);
             return Int32.Parse(m.Value);
+        }
+        public UserData GetContactInformationFromDetails(int index)
+        {
+            app.Navigator.OpenHomePage();
+            Thread.Sleep(300);
+            GoToContactDetails(0);
+
+            string AllContactData = driver.FindElement(By.XPath("//div[@id='content']")).Text;
+
+            return new UserData()
+            {
+                AllContactData = AllContactData
+            };
+
+        }
+        public ContactHelper GoToContactDetails(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"))[6]
+                .FindElement(By.TagName("a")).Click();
+            return this;
         }
     }
 
